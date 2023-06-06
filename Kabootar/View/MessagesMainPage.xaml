@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Kabootar.MessagesMainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModel="clr-namespace:Kabootar"
+    Title="Messages"
+    BackgroundColor="{StaticResource Primary}">
+    <ContentPage.BindingContext>
+        <viewModel:MessagesViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style x:Key="BorderSmallImageStyle" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{StaticResource Tertiary}" />
+            <Setter Property="HeightRequest" Value="40" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="WidthRequest" Value="40" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+        </Style>
+    </ContentPage.Resources>
+    <NavigationPage.TitleView>
+        <StackLayout Padding="16,0,16,0" Orientation="Horizontal">
+            <Border
+                HorizontalOptions="StartAndExpand"
+                Style="{StaticResource BorderSmallImageStyle}"
+                VerticalOptions="Center">
+                <Image Aspect="AspectFill" Source="hamburger" />
+            </Border>
+            <Label
+                FontAttributes="Bold"
+                FontSize="Medium"
+                Text="Messages"
+                TextColor="White"
+                VerticalOptions="Center" />
+            <Border
+                HorizontalOptions="EndAndExpand"
+                Style="{StaticResource BorderSmallImageStyle}"
+                VerticalOptions="Center">
+                <Image Aspect="AspectFill" Source="search" />
+            </Border>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <Border
+        BackgroundColor="White"
+        StrokeShape="RoundRectangle 50,50,0,0"
+        VerticalOptions="FillAndExpand">
+        <Grid Padding="16">
+            <ActivityIndicator
+                HeightRequest="100"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsRunning}"
+                IsVisible="{Binding IsRunning}"
+                VerticalOptions="Center"
+                WidthRequest="100"
+                Color="{StaticResource Primary}" />
+            <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView
+                    x:Name="MessagesCollectionView"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding IsVisible}"
+                    ItemsSource="{Binding ChatList}"
+                    SelectedItem="{Binding ChatDataModel}"
+                    SelectionChangedCommand="{Binding OpenSelectedMessageCommand}"
+                    SelectionChangedCommandParameter="{Binding .}"
+                    SelectionMode="Single"
+                    VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="20" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+
+                        <DataTemplate x:DataType="viewModel:ChatDataModel">
+                            <Grid ColumnDefinitions="20*,70*,10*">
+                                <Border
+                                    Grid.Column="0"
+                                    HeightRequest="65"
+                                    StrokeShape="RoundRectangle 55"
+                                    WidthRequest="65">
+                                    <Image Source="{Binding ImageSource}" />
+                                </Border>
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    Padding="15,0,0,0"
+                                    VerticalOptions="Center">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Medium"
+                                        Text="{Binding Name}"
+                                        TextColor="Black" />
+                                    <Label
+                                        FontSize="12"
+                                        Text="{Binding Message}"
+                                        TextColor="Grey" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="2" VerticalOptions="Center">
+                                    <Label
+                                        FontSize="12"
+                                        Text="{Binding Time}"
+                                        TextColor="Grey" />
+                                    <Border
+                                        BackgroundColor="{StaticResource Primary}"
+                                        HeightRequest="30"
+                                        StrokeShape="RoundRectangle 20"
+                                        WidthRequest="30">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="Small"
+                                            HorizontalOptions="Center"
+                                            Text="3"
+                                            TextColor="White"
+                                            VerticalOptions="Center" />
+                                    </Border>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonGroup">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="White" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="White" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </CollectionView>
+            </RefreshView>
+            <Button
+                Margin="10"
+                CornerRadius="60"
+                HeightRequest="70"
+                HorizontalOptions="End"
+                ImageSource="plus"
+                VerticalOptions="End"
+                WidthRequest="70" />
+        </Grid>
+    </Border>
+</ContentPage>

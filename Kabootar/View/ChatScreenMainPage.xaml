@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Kabootar.ChatScreenMainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:templateSelector="clr-namespace:Kabootar"
+    xmlns:viewModel="clr-namespace:Kabootar"
+    Title="ChatScreenMainPage"
+    BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <viewModel:ChatPageViewModel />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <StackLayout
+            Padding="16,0,16,0"
+            BackgroundColor="White"
+            Orientation="Horizontal">
+            <Image
+                HeightRequest="20"
+                HorizontalOptions="StartAndExpand"
+                Source="back"
+                VerticalOptions="Center"
+                WidthRequest="20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding MoveBackCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Label
+                FontAttributes="Bold"
+                FontSize="Large"
+                Text="Person"
+                TextColor="{StaticResource Primary}"
+                VerticalOptions="Center" />
+            <Image
+                HeightRequest="20"
+                HorizontalOptions="EndAndExpand"
+                Source="phone"
+                VerticalOptions="Center"
+                WidthRequest="20" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+
+        <DataTemplate x:Key="FromMessageTemplate" x:DataType="viewModel:ChatDataModel">
+            <Grid ColumnDefinitions="15*, 85*">
+                <Border
+                    Grid.Column="0"
+                    HeightRequest="40"
+                    StrokeShape="RoundRectangle 30"
+                    VerticalOptions="Start"
+                    WidthRequest="40">
+                    <Image Source="{Binding ImageSource}" />
+                </Border>
+                <VerticalStackLayout Grid.Column="1" Spacing="5">
+                    <Label
+                        FontSize="15"
+                        Text="{Binding Message}"
+                        TextColor="Black" />
+                    <Label
+                        FontSize="12"
+                        Text="{Binding Time}"
+                        TextColor="Grey" />
+                </VerticalStackLayout>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="ToMessageDataTemplate" x:DataType="viewModel:ChatDataModel">
+            <Grid HorizontalOptions="EndAndExpand">
+                <VerticalStackLayout HorizontalOptions="EndAndExpand">
+                    <Border
+                        Padding="16"
+                        BackgroundColor="{StaticResource Primary}"
+                        StrokeShape="RoundRectangle 30,30,30,0">
+                        <Label Text="{Binding Message}" TextColor="White" />
+                    </Border>
+                    <Label
+                        HorizontalOptions="EndAndExpand"
+                        Text="{Binding Time}"
+                        TextColor="Grey" />
+                </VerticalStackLayout>
+            </Grid>
+        </DataTemplate>
+        <templateSelector:ChatDataTemplateSelector
+            x:Key="ChatDataTemplateSelectorXaml"
+            FromMessageTemplate="{StaticResource FromMessageTemplate}"
+            ToMessageTemplate="{StaticResource ToMessageDataTemplate}" />
+    </ContentPage.Resources>
+    <Grid BackgroundColor="{StaticResource Tertiary}" RowDefinitions="85*, 15*">
+        <Border
+            Margin="0,-1,0,0"
+            Padding="16"
+            StrokeShape="RoundRectangle 0,0,50,50"
+            StrokeThickness="0">
+            <Grid>
+                <CollectionView
+                    x:Name="ChatCollectionView"
+                    ItemTemplate="{StaticResource ChatDataTemplateSelectorXaml}"
+                    ItemsSource="{Binding ChatDataModel}"
+                    VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="20" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </Grid>
+        </Border>
+        <Frame
+            Grid.Row="1"
+            Margin="10,10,10,40"
+            Padding="5"
+            BackgroundColor="{StaticResource Primary}"
+            BorderColor="{StaticResource Tertiary}"
+            CornerRadius="30"
+            HasShadow="True"
+            HeightRequest="60">
+            <Grid ColumnDefinitions="10*,70*,10*,10*">
+                <Image
+                    Grid.Column="0"
+                    HeightRequest="25"
+                    Source="smile"
+                    WidthRequest="25" />
+                <Entry
+                    Grid.Column="1"
+                    FontSize="Medium"
+                    Text="{Binding Message}"
+                    TextColor="White"
+                    VerticalOptions="End"
+                    WidthRequest="-1" />
+                <Image
+                    Grid.Column="2"
+                    HeightRequest="20"
+                    Source="clip"
+                    WidthRequest="20" />
+                <Image
+                    Grid.Column="3"
+                    HeightRequest="20"
+                    Source="send"
+                    WidthRequest="20">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </Frame>
+    </Grid>
+</ContentPage>
