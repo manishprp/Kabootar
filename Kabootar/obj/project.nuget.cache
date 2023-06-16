@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ac/nnMWPkGqd/vRL25lJtCwHJ5FeN9bNR1Yr+Lgibs0BsDG72gGzuaRb4xwNdtUsQ9OMkXjavGgALnK1Kvr5pA==",
+  "dgSpecHash": "HWZ9vPDp5lqz2b7EcSeZTkTp0ZieY8Odqz0Qkf+AZEYnTvwpysbnhcB6z0r2qz4xPe6gj5R32LpU0M+fzbuk1g==",
   "success": true,
   "projectFilePath": "C:\\Users\\manish.rajpurohit\\Documents\\NewRepos\\Kabootar\\Kabootar\\Kabootar.csproj",
   "expectedPackageFiles": [
@@ -118,7 +118,6 @@
     "C:\\Users\\manish.rajpurohit\\.nuget\\packages\\xamarin.kotlin.stdlib.jdk8\\1.7.20.1\\xamarin.kotlin.stdlib.jdk8.1.7.20.1.nupkg.sha512",
     "C:\\Users\\manish.rajpurohit\\.nuget\\packages\\xamarin.kotlinx.coroutines.android\\1.6.4.1\\xamarin.kotlinx.coroutines.android.1.6.4.1.nupkg.sha512",
     "C:\\Users\\manish.rajpurohit\\.nuget\\packages\\xamarin.kotlinx.coroutines.core.jvm\\1.6.4.1\\xamarin.kotlinx.coroutines.core.jvm.1.6.4.1.nupkg.sha512",
-    "C:\\Users\\manish.rajpurohit\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\7.0.5\\microsoft.netcore.app.crossgen2.win-x64.7.0.5.nupkg.sha512",
     "C:\\Users\\manish.rajpurohit\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.28\\microsoft.windows.sdk.net.ref.10.0.19041.28.nupkg.sha512",
     "C:\\Users\\manish.rajpurohit\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.5\\microsoft.aspnetcore.app.runtime.win-x64.7.0.5.nupkg.sha512",
     "C:\\Users\\manish.rajpurohit\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.5\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.5.nupkg.sha512",

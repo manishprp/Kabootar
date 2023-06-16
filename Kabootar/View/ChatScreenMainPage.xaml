@@ -42,42 +42,70 @@
     <ContentPage.Resources>
 
         <DataTemplate x:Key="FromMessageTemplate" x:DataType="viewModel:ChatDataModel">
-            <Grid ColumnDefinitions="15*, 85*">
-                <Border
-                    Grid.Column="0"
-                    HeightRequest="40"
-                    StrokeShape="RoundRectangle 30"
-                    VerticalOptions="Start"
-                    WidthRequest="40">
-                    <Image Source="{Binding ImageSource}" />
-                </Border>
-                <VerticalStackLayout Grid.Column="1" Spacing="5">
-                    <Label
-                        FontSize="15"
-                        Text="{Binding Message}"
-                        TextColor="Black" />
-                    <Label
-                        FontSize="12"
-                        Text="{Binding Time}"
-                        TextColor="Grey" />
-                </VerticalStackLayout>
-            </Grid>
+            <SwipeView>
+                <SwipeView.LeftItems>
+                    <SwipeItems Mode="Execute">
+                        <SwipeItemView Command="{Binding Source={x:Reference ChatCollectionView}, Path=BindingContext.ReplyCommand}" CommandParameter="{Binding .}">
+                            <StackLayout>
+                                <Image
+                                    HeightRequest="50"
+                                    Source="dotnet_bot"
+                                    WidthRequest="50" />
+                            </StackLayout>
+                        </SwipeItemView>
+                    </SwipeItems>
+                </SwipeView.LeftItems>
+                <Grid ColumnDefinitions="15*, 85*">
+                    <Border
+                        Grid.Column="0"
+                        HeightRequest="40"
+                        StrokeShape="RoundRectangle 30"
+                        VerticalOptions="Start"
+                        WidthRequest="40">
+                        <Image Source="{Binding ImageSource}" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label
+                            FontSize="15"
+                            Text="{Binding Message}"
+                            TextColor="Black" />
+                        <Label
+                            FontSize="12"
+                            Text="{Binding Time}"
+                            TextColor="Grey" />
+                    </VerticalStackLayout>
+                </Grid>
+            </SwipeView>
         </DataTemplate>
         <DataTemplate x:Key="ToMessageDataTemplate" x:DataType="viewModel:ChatDataModel">
-            <Grid HorizontalOptions="EndAndExpand">
-                <VerticalStackLayout HorizontalOptions="EndAndExpand">
-                    <Border
-                        Padding="16"
-                        BackgroundColor="{StaticResource Primary}"
-                        StrokeShape="RoundRectangle 30,30,30,0">
-                        <Label Text="{Binding Message}" TextColor="White" />
-                    </Border>
-                    <Label
-                        HorizontalOptions="EndAndExpand"
-                        Text="{Binding Time}"
-                        TextColor="Grey" />
-                </VerticalStackLayout>
-            </Grid>
+            <SwipeView>
+                <SwipeView.LeftItems>
+                    <SwipeItems Mode="Execute">
+                        <SwipeItemView Command="{Binding Source={x:Reference ChatCollectionView}, Path=BindingContext.ReplyCommand}" CommandParameter="{Binding .}">
+                            <StackLayout>
+                                <Image
+                                    HeightRequest="50"
+                                    Source="dotnet_bot"
+                                    WidthRequest="50" />
+                            </StackLayout>
+                        </SwipeItemView>
+                    </SwipeItems>
+                </SwipeView.LeftItems>
+                <Grid HorizontalOptions="EndAndExpand">
+                    <VerticalStackLayout HorizontalOptions="EndAndExpand">
+                        <Border
+                            Padding="16"
+                            BackgroundColor="{StaticResource Primary}"
+                            StrokeShape="RoundRectangle 30,30,30,0">
+                            <Label Text="{Binding Message}" TextColor="White" />
+                        </Border>
+                        <Label
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding Time}"
+                            TextColor="Grey" />
+                    </VerticalStackLayout>
+                </Grid>
+            </SwipeView>
         </DataTemplate>
         <templateSelector:ChatDataTemplateSelector
             x:Key="ChatDataTemplateSelectorXaml"
@@ -102,43 +130,122 @@
                 </CollectionView>
             </Grid>
         </Border>
-        <Frame
-            Grid.Row="1"
-            Margin="10,10,10,40"
-            Padding="5"
-            BackgroundColor="{StaticResource Primary}"
-            BorderColor="{StaticResource Tertiary}"
-            CornerRadius="30"
-            HasShadow="True"
-            HeightRequest="60">
-            <Grid ColumnDefinitions="10*,70*,10*,10*">
-                <Image
-                    Grid.Column="0"
-                    HeightRequest="25"
-                    Source="smile"
-                    WidthRequest="25" />
-                <Entry
-                    Grid.Column="1"
-                    FontSize="Medium"
-                    Text="{Binding Message}"
-                    TextColor="White"
-                    VerticalOptions="End"
-                    WidthRequest="-1" />
-                <Image
-                    Grid.Column="2"
-                    HeightRequest="20"
-                    Source="clip"
-                    WidthRequest="20" />
-                <Image
-                    Grid.Column="3"
-                    HeightRequest="20"
-                    Source="send"
-                    WidthRequest="20">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
-                    </Image.GestureRecognizers>
-                </Image>
+        <Grid Grid.Row="1">
+            <Grid HeightRequest="150" IsVisible="{Binding IsReplyVisible}">
+                <Border
+                    BackgroundColor="{StaticResource Primary}"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="0">
+                    <Grid>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            HorizontalOptions="End"
+                            Text="X"
+                            TextColor="White"
+                            VerticalOptions="Start">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CancelReplyCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <VerticalStackLayout Grid.Row="0">
+                            <Label
+                                Margin="10,0,10,0"
+                                FontSize="Large"
+                                HorizontalOptions="Start"
+                                Text="{Binding Sender}"
+                                TextColor="White" />
+                            <Label
+                                Margin="10,0,10,0"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding SwipedMessage}"
+                                TextColor="White" />
+                            <Frame
+                                Margin="10,10,10,40"
+                                Padding="5"
+                                BackgroundColor="{StaticResource Primary}"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="30"
+                                HasShadow="True"
+                                HeightRequest="60">
+
+                                <Grid ColumnDefinitions="10*,70*,10*,10*" VerticalOptions="End">
+                                    <Image
+                                        Grid.Column="0"
+                                        HeightRequest="25"
+                                        Source="smile"
+                                        WidthRequest="25" />
+                                    <Entry
+                                        x:Name="MessageEntryReple"
+                                        Grid.Column="1"
+                                        FontSize="Medium"
+                                        Text="{Binding Message}"
+                                        TextColor="White"
+                                        VerticalOptions="End"
+                                        WidthRequest="-1" />
+                                    <Image
+                                        Grid.Column="2"
+                                        HeightRequest="20"
+                                        Source="clip"
+                                        WidthRequest="20" />
+                                    <Image
+                                        Grid.Column="3"
+                                        HeightRequest="20"
+                                        Source="send"
+                                        WidthRequest="20">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
             </Grid>
-        </Frame>
+            <Grid IsVisible="{Binding IsNewMessageVisible}" VerticalOptions="EndAndExpand">
+                <Frame
+                    Margin="10,10,10,40"
+                    Padding="5"
+                    BackgroundColor="{StaticResource Primary}"
+                    BorderColor="{StaticResource Tertiary}"
+                    CornerRadius="30"
+                    HasShadow="True"
+                    HeightRequest="60"
+                    VerticalOptions="EndAndExpand">
+
+                    <Grid ColumnDefinitions="10*,70*,10*,10*" VerticalOptions="End">
+                        <Image
+                            Grid.Column="0"
+                            HeightRequest="25"
+                            Source="smile"
+                            WidthRequest="25" />
+                        <Entry
+                            x:Name="NewMessageEntry"
+                            Grid.Column="1"
+                            FontSize="Medium"
+                            Text="{Binding Message}"
+                            TextColor="White"
+                            VerticalOptions="End"
+                            WidthRequest="-1" />
+                        <Image
+                            Grid.Column="2"
+                            HeightRequest="20"
+                            Source="clip"
+                            WidthRequest="20" />
+                        <Image
+                            Grid.Column="3"
+                            HeightRequest="20"
+                            Source="send"
+                            WidthRequest="20">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </Grid>
     </Grid>
 </ContentPage>

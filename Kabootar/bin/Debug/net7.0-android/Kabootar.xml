@@ -8,9 +8,26 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:Kabootar.ChatPageViewModel.ChatDataModel">
             <inheritdoc cref="F:Kabootar.ChatPageViewModel._chatDataModel"/>
+        </member>
+        <member name="P:Kabootar.ChatPageViewModel.Sender">
+            <inheritdoc cref="F:Kabootar.ChatPageViewModel._sender"/>
+        </member>
+        <member name="P:Kabootar.ChatPageViewModel.SwipedMessage">
+            <inheritdoc cref="F:Kabootar.ChatPageViewModel._swipedMessage"/>
+        </member>
+        <member name="P:Kabootar.ChatPageViewModel.ChatModel">
+            <inheritdoc cref="F:Kabootar.ChatPageViewModel._chatModel"/>
+        </member>
+        <member name="P:Kabootar.ChatPageViewModel.IsReplyVisible">
+            <inheritdoc cref="F:Kabootar.ChatPageViewModel._isReplyVisible"/>
+        </member>
+        <member name="P:Kabootar.ChatPageViewModel.IsNewMessageVisible">
+            <inheritdoc cref="F:Kabootar.ChatPageViewModel._isNewMessageVisible"/>
         </member>
         <member name="P:Kabootar.ChatPageViewModel.Message">
             <inheritdoc cref="F:Kabootar.ChatPageViewModel._message"/>
@@ -26,6 +43,18 @@
         </member>
         <member name="P:Kabootar.ChatPageViewModel.SendMessageCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:Kabootar.ChatPageViewModel.SendMessage"/>.</summary>
+        </member>
+        <member name="F:Kabootar.ChatPageViewModel.cancelReplyCommand">
+            <summary>The backing field for <see cref="P:Kabootar.ChatPageViewModel.CancelReplyCommand"/>.</summary>
+        </member>
+        <member name="P:Kabootar.ChatPageViewModel.CancelReplyCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:Kabootar.ChatPageViewModel.CancelReply"/>.</summary>
+        </member>
+        <member name="F:Kabootar.ChatPageViewModel.replyCommand">
+            <summary>The backing field for <see cref="P:Kabootar.ChatPageViewModel.ReplyCommand"/>.</summary>
+        </member>
+        <member name="P:Kabootar.ChatPageViewModel.ReplyCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:Kabootar.ChatPageViewModel.Reply(System.Object)"/>.</summary>
         </member>
         <member name="T:Kabootar.MessagesViewModel">
             <inheritdoc/>
@@ -167,6 +196,21 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChatDataModel">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChatDataModel" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Sender">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Sender" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SwipedMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SwipedMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChatModel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChatModel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsReplyVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsReplyVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsNewMessageVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsNewMessageVisible" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Message">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Message" generated properties.</summary>
         </member>
@@ -190,6 +234,21 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChatDataModel">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChatDataModel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Sender">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Sender" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SwipedMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SwipedMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChatModel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChatModel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsReplyVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsReplyVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsNewMessageVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsNewMessageVisible" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Message">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Message" generated properties.</summary>
